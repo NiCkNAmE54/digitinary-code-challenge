@@ -1,8 +1,8 @@
 import { Module, DynamicModule, NotImplementedException } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ConfigDBData } from '../config/config.interface';
-import { ConfigModule } from '../config/config.module';
-import { ConfigService } from '../config/config.service';
+import { ConfigDBData } from './config/config.interface';
+import { ConfigModule } from './config/config.module';
+import { ConfigService } from './config/config.service';
 import { DbConfig } from './db.interface';
 import { DbConfigError, DbError } from './db.error';
 
@@ -31,9 +31,8 @@ export class DatabaseModule {
         logging: true,
       }; 
   }
-  private static getConnectionOptionsSqlite(dbdata: any): TypeOrmModuleOptions {
-    throw new NotImplementedException(`Database type '${dbdata.type}' not supported`);
-  }
+
+  
   private static getConnectionOptionsMysql(dbdata: ConfigDBData): TypeOrmModuleOptions {
     return {
       type: 'mysql',

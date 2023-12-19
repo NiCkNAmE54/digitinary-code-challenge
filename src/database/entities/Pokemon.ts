@@ -1,9 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Weather } from './Waether';
-import { IWeather } from './interfaces/IWeather';
 import { Type } from './Type';
-import { IType } from './interfaces/IType';
-import { IFamily } from './interfaces/IFamily';
 import { Family } from './Family';
 
 
@@ -32,24 +29,22 @@ export class Pokemon {
   evolved: boolean;
 
   @ManyToOne(() => Family, (family) => family.pokemon)
-  familyId: IFamily;
+  familyId: Family;
 
   @Column()
   crossGen: boolean;
 
   @ManyToOne(() => Type, (type) => type.pokemon1)
-  type1: IType;
+  type1: Type;
 
-  @Column({ nullable: true })
   @ManyToOne(() => Type, (type) => type.pokemon2)
-  type2: IType;
+  type2: Type;
 
   @ManyToOne(() => Weather, (weather) => weather.pokemon1)
-  weather1: IWeather;
+  weather1: Weather;
 
-  @Column({ nullable: true })
   @ManyToOne(() => Weather, (weather) => weather.pokemon2)
-  weather2: IWeather;
+  weather2: Weather;
 
   @Column()
   statTotal: number;
