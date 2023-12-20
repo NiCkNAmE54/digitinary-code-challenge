@@ -10,10 +10,11 @@ export class PokemonController {
   async getAll(): Promise<Pokemon[]> {
     return await this.pokemonService.getAll();
   }
-  @Get('getById/:id')
-  async getById(@Param('id') id: number): Promise<Pokemon> {
-    return await this.pokemonService.getById(id);
-  }
+
+  // @Get('getById/:id')
+  // async getById(@Param('id') id: number): Promise<Pokemon> {
+  //   return await this.pokemonService.getById(id);
+  // }
 
   @Post('create')
   async create(@Body() pokemon: Pokemon) : Promise<Pokemon> {

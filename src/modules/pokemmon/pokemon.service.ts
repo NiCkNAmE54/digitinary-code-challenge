@@ -1,37 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pokemon } from 'src/database/entities/Pokemon';
+import { BaseService } from 'src/shared/core/BaseService';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class PokemonService {
+export class PokemonService extends BaseService<Pokemon> {
 
-
-
-  constructor(@InjectRepository(Pokemon) private pokemonRepository: Repository<Pokemon>) {}
-
-  async getAll() : Promise<Pokemon[]> {
-    return await this.pokemonRepository.find();
+  constructor(@InjectRepository(Pokemon) private pokemonRepository: Repository<Pokemon>) {
+    super();
+    this.repository = pokemonRepository;
   }
-
-  async getById(id: number) : Promise<Pokemon> {
-    return await this.pokemonRepository.findOne({
-        where: {
-            id
-        }
-    });
-  }
-
-  async create(pokemon: Pokemon) : Promise<Pokemon> {
-    return await this.pokemonRepository.create(pokemon);
-  }
-
-  async update(pokemon: Pokemon): Promise<Pokemon> {
-    return await this.pokemonRepository.save(pokemon);
-  }
-
-  async delete(id: number): Promise<any> {
-    return await this.pokemonRepository.delete(id);
-  }
-
 }
