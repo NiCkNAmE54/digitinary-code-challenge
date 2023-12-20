@@ -11,10 +11,10 @@ services:
     mysql:
         image: mysql:5.7
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: test
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: P@ssw0rd
+            MYSQL_DATABASE: PokemonDB
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: P@ssw0rd
         volumes:
         - mysql-data:/var/lib/mysql 
         ports:

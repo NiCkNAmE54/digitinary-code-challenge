@@ -1,8 +1,8 @@
 import { Module, DynamicModule, NotImplementedException } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ConfigDBData } from './config/config.interface';
-import { ConfigModule } from './config/config.module';
-import { ConfigService } from './config/config.service';
+import { ConfigDBData } from '../shared/config/config.interface';
+import { ConfigModule } from '../shared/config/config.module';
+import { ConfigService } from '../shared/config/config.service';
 import { DbConfig } from './db.interface';
 import { DbConfigError, DbError } from './db.error';
 

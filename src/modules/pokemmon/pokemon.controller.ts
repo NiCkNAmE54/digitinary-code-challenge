@@ -4,7 +4,7 @@ import { Pokemon } from 'src/database/entities/Pokemon';
 
 @Controller('pokemon')
 export class PokemonController {
-  constructor(private readonly pokemonService: PokemonService) {}
+  constructor(private readonly pokemonService: PokemonService) { }
 
   @Get('getAll')
   async getAll(): Promise<Pokemon[]> {
@@ -16,8 +16,20 @@ export class PokemonController {
   //   return await this.pokemonService.getById(id);
   // }
 
+  @Get('find')
+  async find(
+    @Body('filter') filter: Record<string, any>,
+    @Param('page') page: number = 1,
+    @Param('pageSize') pageSize: number = 10
+  ): Promise<{
+    data: Pokemon[];
+    total: number;
+  }> {
+    return await this.pokemonService.find(filter, page, pageSize);
+  }
+
   @Post('create')
-  async create(@Body() pokemon: Pokemon) : Promise<Pokemon> {
+  async create(@Body() pokemon: Pokemon): Promise<Pokemon> {
     return await this.pokemonService.create(pokemon);
   }
 
