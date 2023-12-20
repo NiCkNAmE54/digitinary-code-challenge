@@ -1,8 +1,8 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { Pokemon } from 'src/database/entities/Pokemon';
 
-@Controller()
+@Controller('Pokemon')
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
@@ -10,8 +10,8 @@ export class PokemonController {
   async getAll(): Promise<Pokemon[]> {
     return await this.pokemonService.getAll();
   }
-  @Get()
-  async getById(id: number): Promise<Pokemon> {
+  @Get('id')
+  async getById(@Param('id') id: number): Promise<Pokemon> {
     return await this.pokemonService.getById(id);
   }
 

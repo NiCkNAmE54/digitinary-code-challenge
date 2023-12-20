@@ -13,4 +13,4 @@ import { Pokemon } from "src/database/entities/Pokemon";
   controllers: [PokemonController],
   providers: [PokemonService],
 })
-export class AppModule {}
+export class PokemonModule {}
