@@ -1,7 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Weather } from './Waether';
 import { Type } from './Type';
-import { Family } from './Family';
 
 
 
@@ -28,8 +27,8 @@ export class Pokemon {
   @Column()
   evolved: boolean;
 
-  @ManyToOne(() => Family, (family) => family.pokemon)
-  familyId: Family;
+  @Column()
+  familyId: number;
 
   @Column()
   crossGen: boolean;

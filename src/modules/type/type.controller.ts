@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { Pokemon } from 'src/database/entities/Pokemon';
 import { BaseController } from 'src/shared/core/BaseController';
 import { TypeService } from './type.service';
-import { Family } from 'src/database/entities/Family';
 import { Type } from 'src/database/entities/Type';
 
 @Controller('type')
