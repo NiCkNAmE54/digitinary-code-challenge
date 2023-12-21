@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { Pokemon } from 'src/database/entities/Pokemon';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('pokemon')
 export class PokemonController {
@@ -17,15 +18,38 @@ export class PokemonController {
   // }
 
   @Get('find')
+  @ApiQuery({ name: 'name', required: false })
+  @ApiQuery({ name: 'generation', required: false })
+  @ApiQuery({ name: 'type1', required: false })
+  @ApiQuery({ name: 'type2', required: false })
+  @ApiQuery({ name: 'evolved', required: false })
+  @ApiQuery({ name: 'familyId', required: false })
+  @ApiQuery({ name: 'legendary', required: false })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'pageSize', required: false })
   async find(
-    @Body('filter') filter: Record<string, any>,
-    @Param('page') page: number = 1,
-    @Param('pageSize') pageSize: number = 10
+    @Query('name') name?: string,
+    @Query('generation') generation?: number,
+    @Query('type1') type1?: string,
+    @Query('type2') type2?: string,
+    @Query('evolved') evolved?: boolean,
+    @Query('familyId') familyId?: number,
+    @Query('legendary') legendary?: boolean,
+    @Query('page') page: number = 1,
+    @Query('pageSize') pageSize: number = 10
   ): Promise<{
     data: Pokemon[];
     total: number;
   }> {
-    return await this.pokemonService.find(filter, page, pageSize);
+    return await this.pokemonService.find({
+      name,
+      generation,
+      type1,
+      type2,
+      evolved,
+      familyId,
+      legendary
+    }, page, pageSize);
   }
 
   @Post('create')

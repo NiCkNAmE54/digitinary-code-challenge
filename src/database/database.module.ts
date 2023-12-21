@@ -19,7 +19,7 @@ export class DatabaseModule {
       throw new DbConfigError('Database config is missing');
     }
     switch (dbdata.type) {
-        case  'mysql':
+        case  'sqlit':
           connectionOptions = this.getConnectionOptionsMysql(dbdata);
           break;
           default:
@@ -35,17 +35,8 @@ export class DatabaseModule {
   
   private static getConnectionOptionsMysql(dbdata: ConfigDBData): TypeOrmModuleOptions {
     return {
-      type: 'mysql',
-      host: dbdata.host,
-      port: dbdata.port,
-      username: dbdata.user,
-      password: dbdata.pass,
-      database: dbdata.name,
-      charset: dbdata.charset,
-      extra: {
-        collate: dbdata.collate,
-        dialect: dbdata.dialect,
-      },
+      type: 'sqlite',
+      database: "./database.db",
     };
   }
   public static forRoot(dbconfig: DbConfig): DynamicModule {
